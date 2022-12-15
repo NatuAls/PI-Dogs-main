@@ -2,7 +2,8 @@ const {Router} = require('express');
 const getApiDogs = require('../controllers/getApiDogs');
 const getDbDogs = require('../controllers/getDbDogs');
 const postDog = require('../controllers/postDog');
-const getIdBreed = require('../controllers/getIdBreed');
+const getApiBreed = require('../controllers/getApiBreed');
+const getDbBreed = require('../controllers/getDbBreed');
 
 const router = Router();
 
@@ -43,9 +44,11 @@ router.post('/', async (req,res) => {
 router.get('/:idBreed', async (req, res) => {
     const {idBreed} = req.params;
     try {
-        const breed = await getIdBreed(idBreed);
-        if(!breed) return res.status(400).send(`No se encontro ninguna raza de perro con el id ${idBreed}`)
-        return res.send(breed);
+        const apiBreed = await getApiBreed(idBreed);
+        if(apiBreed) return res.send(apiBreed);
+        const dbBreed = await getDbBreed(idBreed);
+        if(dbBreed) return res.send(dbBreed);
+        return res.status(400).send(`No se encontro ninguna raza de perro con el id ${idBreed}`)
     } catch (error) {
         res.status(404).send(error.message);
     }

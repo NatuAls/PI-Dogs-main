@@ -1,10 +1,8 @@
-const {Dog, Temperament} = require('../db');
-
-module.exports = getIdBreed = async idRaza => {
+module.exports = getIdBreed = async idBreed => {
     try {
         const apiBreed = await fetch('https://api.thedogapi.com/v1/breeds')
             .then(response => response.json())
-            .then(data => data.filter(el => el.id === parseInt(idRaza)));
+            .then(data => data.filter(el => el.id === parseInt(idBreed)));
 
         if(apiBreed.length){
             const result = {
@@ -17,20 +15,8 @@ module.exports = getIdBreed = async idRaza => {
             }
             return result;
         }
-
-        const dbBreed = await Dog.findByPk(idRaza, {
-            attributes: {exclude: ['id']},
-            include: {
-                model: Temperament,
-                through: {
-                    attributes: []
-                }
-            }
-        });
-
-        if(dbBreed) return dbBreed;
-        return false;
+        return false
     } catch (error) {
-        return false;
+        throw TypeError(error.message);
     }
 }
