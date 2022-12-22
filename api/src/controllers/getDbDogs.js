@@ -15,10 +15,9 @@ module.exports = getDbDogs = async (name = null) => {
                 }            
             }]
         });
-        console.log('result: ', result);
         return result
     }
-    return await Dog.findAll({
+    const dogs = await Dog.findAll({
         attributes: ['name', 'weight', 'createInDb'],
         include: [{
             model: Temperament,
@@ -27,4 +26,5 @@ module.exports = getDbDogs = async (name = null) => {
             }            
         }]
     });
+    return dogs
 }

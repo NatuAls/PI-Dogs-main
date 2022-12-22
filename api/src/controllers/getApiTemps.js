@@ -1,6 +1,8 @@
+const axios = require('axios');
+
 module.exports = getApiTemps = async () => {
-    const apiTemperaments = await fetch('https://api.thedogapi.com/v1/breeds')
-        .then(response => response.json())
+    const apiTemperaments = await axios.get('https://api.thedogapi.com/v1/breeds')
+        .then(response => response.data)
         .then(data => data.map(el => el.temperament));
 
     let temperaments = [];

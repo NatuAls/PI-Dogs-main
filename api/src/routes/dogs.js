@@ -22,6 +22,7 @@ router.get('/', async (req, res) => {
         let result;
         if(dbDogs.length) result = dbDogs.concat(apiDogs);
         else result = apiDogs;
+        console.log(result[0]);
         res.send(result);        
     } catch (error) {
         res.status(400).send(error.message);
