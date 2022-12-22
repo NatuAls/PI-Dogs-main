@@ -1,21 +1,8 @@
+const axios = require('axios');
+
 module.exports = getApiDogs = async (name = null) => {
-    if(name){
-        return fetch(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-            .then(response => response.json())
-            .then(data => {
-                if(!data.length) return data;
-                return  data.map(e => {
-                    return {
-                        name: e.name,
-                        weight: e.weight,
-                        temperament: e.temperament,
-                        image: e.image
-                    }
-                });
-            });
-    }
-    return fetch('https://api.thedogapi.com/v1/breeds')
-        .then(response => response.json())
+    const dogs = await axios.get('https://api.thedogapi.com/v1/breeds')
+        .then(response => response.data)
         .then(data => data.map(e => {
             return {
                 name: e.name,
@@ -24,4 +11,30 @@ module.exports = getApiDogs = async (name = null) => {
                 image: e.image
             }
         }));
+
+    if(name){
+        return axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
+            .then(response => response.data)
+            .then(data => {
+                if(!data.length) return data;
+                return  data.map(e => {
+                    if(e.reference_image_id){
+                        return {
+                            name: e.name,
+                            weight: e.weight,
+                            temperament: e.temperament,
+                            image: dogs.filter(el => el.image.id === e.reference_image_id)[0].image
+                        }
+                    }
+                    else{
+                        return {
+                            name: e.name,
+                            weight: e.weight,
+                            temperament: e.temperament,
+                        }
+                    }
+                });
+            });
+    }
+    else return dogs;
 }

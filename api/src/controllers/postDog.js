@@ -19,5 +19,6 @@ module.exports = postDog = async (name, height, weight, life_span, temperaments)
             }
         }
     });
-    return dbDog;
+    // console.log(JSON.parse(JSON.stringify(dbDog)));
+    return JSON.parse(JSON.stringify(dbDog));
 } 
