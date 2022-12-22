@@ -14,6 +14,6 @@ module.exports = getDbBreed = async idBreed => {
         if(dbBreed) return dbBreed;
         return false;
     } catch (error) {
-        throw TypeError(error.message);
+        return false;
     }
 }
