@@ -3,28 +3,50 @@ const {Op} = require('sequelize');
 
 module.exports = getDbDogs = async (name = null) => {
     if(name){
-        const result = await Dog.findAll({
+        const dogs = await Dog.findAll({
             where: {
                 name: {[Op.iLike]: `%${name}%`}
             },
-            attributes: ['name', 'weight', 'createInDb'],
+            attributes: ['id', 'name', 'weight', 'createInDb'],
             include: [{
                 model: Temperament,
+                as: 'temperament',
                 through: {
                     attributes: []
                 }            
             }]
         });
-        return result
+        if(dogs.length){
+            let result = JSON.parse(JSON.stringify(dogs));
+            result = result.map(el => {
+                return {
+                    ...el,
+                    temperament: el.temperament.map(e => e.name).join(', ')
+                }
+            })        
+            return result
+        }
+        return dogs;
     }
     const dogs = await Dog.findAll({
-        attributes: ['name', 'weight', 'createInDb'],
+        attributes: ['id', 'name', 'weight', 'createInDb'],
         include: [{
             model: Temperament,
+            as: 'temperament',
             through: {
                 attributes: []
             }            
         }]
     });
-    return dogs
+    if(dogs.length){
+        let result = JSON.parse(JSON.stringify(dogs));
+        result = result.map(el => {
+            return {
+                ...el,
+                temperament: el.temperament.map(e => e.name).join(', ')
+            }
+        })
+        return result
+    }
+    return dogs;
 }

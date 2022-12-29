@@ -5,6 +5,7 @@ module.exports = getApiDogs = async (name = null) => {
         .then(response => response.data)
         .then(data => data.map(e => {
             return {
+                id: e.id,
                 name: e.name,
                 weight: e.weight,
                 temperament: e.temperament,
@@ -20,6 +21,7 @@ module.exports = getApiDogs = async (name = null) => {
                 return  data.map(e => {
                     if(e.reference_image_id){
                         return {
+                            id: e.id,
                             name: e.name,
                             weight: e.weight,
                             temperament: e.temperament,

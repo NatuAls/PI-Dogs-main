@@ -18,5 +18,15 @@ module.exports = getApiTemps = async () => {
 
     temperaments = temperaments.map(el => {return {name: el}});
 
-    return temperaments;
+    const result = temperaments.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+    });
+
+    return result;
 }
