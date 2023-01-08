@@ -7,7 +7,7 @@ module.exports = getApiDogs = async (name = null) => {
             return {
                 id: e.id,
                 name: e.name,
-                weight: e.weight,
+                weight: e.weight.metric.replace('NaN', 'Sin especificar'),
                 temperament: e.temperament,
                 image: e.image
             }
@@ -23,16 +23,21 @@ module.exports = getApiDogs = async (name = null) => {
                         return {
                             id: e.id,
                             name: e.name,
-                            weight: e.weight,
+                            height: e.height.metric.replace('NaN', 'Sin especificar'),
+                            weight: e.weight.metric.replace('NaN', 'Sin especificar'),
+                            life_span: e.life_span.replace('year', 'años'),
                             temperament: e.temperament,
                             image: dogs.filter(el => el.image.id === e.reference_image_id)[0].image
                         }
                     }
                     else{
                         return {
+                            id: e.id,
                             name: e.name,
-                            weight: e.weight,
-                            temperament: e.temperament,
+                            height: e.height.metric.replace('NaN', 'Sin especificar'),
+                            weight: e.weight.metric.replace('NaN', 'Sin especificar'),
+                            life_span: e.life_span.replace('year', 'años'),
+                            temperament: e.temperament
                         }
                     }
                 });

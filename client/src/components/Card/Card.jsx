@@ -1,12 +1,19 @@
-function Card({name, image, temperament, weight, createInDb}) {
+import './Card.css'
+import { Link } from 'react-router-dom';
+import imageDefault from '../../images/istockphoto-1223195737-612x612.jpg'
+
+function Card({id, name, image = imageDefault, temperament = 'Sin especificar', weight}) {
 
     return(
-        <div>
-            {image && <img src={image} alt={name}/>}
-            <h1>{name}</h1>
-            <h3>{temperament}</h3>
-            {createInDb && <h3>{weight}</h3>}
-            {!createInDb && <h3>{weight.metric}</h3>}
+        <div className='card'>
+            <img className='imagecard' src={image} alt={name}/>
+            <Link className='name' to={`dog/${id}`}><h1>{name}</h1></Link>
+            <p>
+                Peso: <span> {weight} Kg</span>
+            </p>          
+            <p>
+                Temperamento(s): <span> {temperament}</span>
+            </p>
         </div>
     )
 }

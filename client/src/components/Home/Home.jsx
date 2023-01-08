@@ -1,12 +1,18 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'; 
+import { getDogs, getTemperaments, loading } from '../../redux/actions';
+import NavBar from '../NavBar/NavBar';
 import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
 import Loader from '../Loader/Loader';
 import FilterByTemps from '../FilterByTemps/FilterByTemps';
 import FilterByExisting from '../FilterByExisting/FilterByExisting';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, getTemperaments, loading } from '../../redux/actions';
+import OrderAlphabetical from '../OrderAlphabetical/OrderAlphabetical';
+import OrderByWeight from '../OrderByWeight/OrderByWeight';
+import BlackBlock from '../BlackBlock/BlackBlock';
+import './Home.css'
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -22,32 +28,48 @@ const Home = () => {
 
     useEffect(() => {
         async function fetchData(){
-            dispatch(loading());
-            await dispatch(getDogs());
-            dispatch(getTemperaments());
-            dispatch(loading());
+            if(allDogs.length === 0 && document.getElementById('fExisting').value !== 'db'){
+                dispatch(loading());
+                await dispatch(getDogs());
+                dispatch(getTemperaments());
+                dispatch(loading());
+            }
         }
         fetchData();
-    }, [dispatch]);
+    }, [dispatch, allDogs]);
 
     return (
-        <div>
-            <SearchBar/>
-            <div>
-                <FilterByTemps/>
-                <FilterByExisting/>
+        <div className='background'>
+            <NavBar/>
+            <div className="divtitulo">
+                <h1 className="titulodetail">Conoce a todas las razas de perros de Henry Dogs</h1>
             </div>
-            {loader === false && currentDogs.length > 0 && <Paginado 
-                currentPage={currentPage} 
+            { currentDogs.length >= 0 && <div className='divsearchandfilters'>
+                <SearchBar/>
+                <div className='divfilters'>
+                    <FilterByTemps/>
+                    <FilterByExisting/>
+                    <OrderAlphabetical/>
+                    <OrderByWeight/>
+                </div>
+            </div>}
+            {loader === false && currentDogs.length > 0 && <Paginado
                 dogsPerPage={dogsPerPage}
                 allDogs={allDogs.length}
             />}
-            <div>
+            <div className='cards'>
                 {loader === true && <Loader/>}
-                {currentDogs.length === 0 && loader === false && <h2>No se encontraron perros</h2>}
+                {currentDogs.length === 0 && loader === false && <div className='divnotfound'>
+                    <div className='notfound'>
+                    <h2>No se encontraron perros en la base de datos, si desea crear una raza nueva haz click 
+                        <Link to='create/breed' className='link'> aquí</Link>
+                    </h2>
+                    </div>
+                </div>}
                 {loader === false && currentDogs.map(el => {
                     return <Card 
                         key={el.id}
+                        id={el.id}
                         name={el.name} 
                         image={el.image && el.image.url}
                         temperament={el.temperament} 
@@ -56,6 +78,13 @@ const Home = () => {
                     />
                 })}
             </div>
+            <div className='divpages2'>
+            {loader === false && currentDogs.length > 0 && <Paginado
+                dogsPerPage={dogsPerPage}
+                allDogs={allDogs.length}
+            />}
+            </div>
+            <BlackBlock/>
         </div>
     );        
 }

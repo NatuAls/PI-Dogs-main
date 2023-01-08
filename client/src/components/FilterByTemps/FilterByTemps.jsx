@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterByTemperaments, filterByExistingC, getCurrentPage, getDogs, loading} from "../../redux/actions";
+import { filterByTemperaments, filterByExistingC, getDogs, loading, setCurrentPage} from "../../redux/actions";
 
 const FilterByTemps = () => {
 
@@ -12,10 +12,12 @@ const FilterByTemps = () => {
         const fExisting = document.getElementById('fExisting').value;
         if(e.target.value !== ''){
             dispatch(loading());
+            document.getElementById('alphabetical').value = '';
+            document.getElementById('byWeight').value = '';
             await dispatch(getDogs());
+            dispatch(setCurrentPage(1));
             if(fExisting === 'api') dispatch(filterByExistingC('api'));
             if(fExisting === 'db') dispatch(filterByExistingC('db'));
-            dispatch(getCurrentPage(1));
             await dispatch(filterByTemperaments(e.target.value));
             dispatch(loading());
         }

@@ -1,13 +1,15 @@
-import Styles from './Landing.module.css';
-import image from '../../images/dog.png';
+import './Landing.css';
 import { Link } from 'react-router-dom';
 
 function Landing() {
   return (
-    <div className={Styles.image}>
-      <div className={Styles.App}>
-        <img src={image} alt='Dogs Logo'/>
-        <Link to={'/home'} className={Styles.text}>Henry Dogs</Link>
+    <div className='image'>
+      <div className='contlanding'>
+        <span>Proyencto individual - Dogs</span>
+        <span>Alesso Nahuel</span>
+        <Link to={'/home'}>
+          <button className='enterbutton'>ENTRAR</button>
+        </Link>
       </div>
     </div>
   );

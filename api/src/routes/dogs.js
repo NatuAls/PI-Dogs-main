@@ -49,7 +49,7 @@ router.get('/:idBreed', async (req, res) => {
         if(apiBreed) return res.send(apiBreed);
         const dbBreed = await getDbBreed(idBreed);
         if(dbBreed) return res.send(dbBreed);
-        return res.status(400).send(`No se encontro ninguna raza de perro con el id ${idBreed}`)
+        return res.status(400).send(`${idBreed}`)
     } catch (error) {
         res.status(404).send(error.message);
     }

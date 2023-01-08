@@ -1,0 +1,28 @@
+.divpages {
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    width: min-content;
+    height: 35px;
+    border: solid 1px white;
+}
+
+.prevbutton {
+    margin-left: 10px;
+    height: 20px;
+    width: auto;
+}
+
+.nextbutton {
+    margin-right: 10px;
+    height: 20px;
+    width: auto;
+}
+
+.buttonpage {
+    height: 20px;
+    width: auto;
+}

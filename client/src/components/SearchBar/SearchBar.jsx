@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getDogsByName, loading } from "../../redux/actions";
+import { getDogsByName, loading, setCurrentPage } from "../../redux/actions";
 
 const SearchBar = () => {
 
@@ -14,16 +14,19 @@ const SearchBar = () => {
     <form onSubmit={async (e) => {
       e.preventDefault();
       setName('');
+      dispatch(loading());
+      await dispatch(setCurrentPage(1));
       document.getElementById('fTemps').value = '';
       document.getElementById('fExisting').value = '';
-      dispatch(loading());
+      document.getElementById('alphabetical').value = '';
+      document.getElementById('byWeight').value = '';
       await dispatch(getDogsByName(name));
       dispatch(loading());
     }}>
       <input
         type="text"
         value={name}
-        placeholder="Nombre..."
+        placeholder="Buscar por nombre..."
         onChange={onChange}
       />
       <input type="submit" value="Buscar" />
