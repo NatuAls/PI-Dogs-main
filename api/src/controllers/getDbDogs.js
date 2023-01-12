@@ -7,11 +7,11 @@ module.exports = getDbDogs = async (name = null) => {
             where: {
                 name: {[Op.iLike]: `%${name}%`}
             },
-            attributes: ['id', 'name', 'weight', 'createInDb'],
+            attributes: ['id', 'name', 'image', 'weight', 'createInDb'],
             include: [{
                 model: Temperament,
                 as: 'temperament',
-                through: {
+                through: { 
                     attributes: []
                 }            
             }]
@@ -29,7 +29,7 @@ module.exports = getDbDogs = async (name = null) => {
         return dogs;
     }
     const dogs = await Dog.findAll({
-        attributes: ['id', 'name', 'weight', 'createInDb'],
+        attributes: ['id', 'name', 'image', 'weight', 'createInDb'],
         include: [{
             model: Temperament,
             as: 'temperament',

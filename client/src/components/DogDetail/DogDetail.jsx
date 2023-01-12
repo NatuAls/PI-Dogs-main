@@ -33,10 +33,10 @@ function DogDetail(){
     return(
         <div className="divdetail">
             <NavBar/>
-            {loader === true && <Loader/>}
             <div className="divtitulo">
                 <h1 className="titulodetail">Detalle de la raza {breed.name}</h1>
             </div>
+            {loader === true && <Loader/>}
             {loader === false && <div className="detailcontenedor">
                 <img src={breed.image} alt={breed.name} className='imagedetail'/>
                 <div className="textdetail">

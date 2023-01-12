@@ -1,8 +1,17 @@
 const {Dog, Temperament} = require('../db');
 const {Op} = require('sequelize');
 
-module.exports = postDog = async (name, height, weight, life_span, temperaments) => {
-    const newDog = await Dog.create({name, height, weight, life_span});
+module.exports = postDog = async (name, image, height, weight, life_span, temperaments) => {
+    const newDog = await Dog.create({name, image, height, weight, life_span});
+    if(!temperaments.length){ 
+        const dbDog = await Dog.findByPk(newDog.id);
+        let result = JSON.parse(JSON.stringify(dbDog));
+        result = {
+            ...result,
+            temperament: []
+        }
+        return result;    
+    }
     const dbTemperaments = await Temperament.findAll({
         where: {
             name: {

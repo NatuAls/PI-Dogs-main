@@ -11,7 +11,7 @@ const NavBar = () => {
                 </div>
             <ul>
                 <Link className="navtext" to='/home'>Home</Link>
-                <Link className="navtext" to='create/breed'>Crear Raza</Link>
+                <Link className="navtext" to='/create/breed'>Crear Raza</Link>
             </ul>
         </nav>
     )

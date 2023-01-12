@@ -1,4 +1,4 @@
-import { GET_DOG, GET_DOGS, GET_DOGS_BY_NAME, LOADER, GET_TEMPERAMENTS, FILTER_BY_TEMPERAMENTS, FILTER_BY_EXISTING_C, SET_CURRENT_PAGE, SORT_BY_NAME, SORT_BY_WEIGHT } from "../actions";
+import { GET_DOG, GET_DOGS, GET_DOGS_BY_NAME, LOADER, GET_TEMPERAMENTS, FILTER_BY_TEMPERAMENTS, FILTER_BY_EXISTING_C, SET_CURRENT_PAGE, SORT_BY_NAME, SORT_BY_WEIGHT, POST_DOG } from "../actions";
 
 const initialState = {
     dogs: [],
@@ -17,7 +17,6 @@ const rootReducer = (state = initialState, action) => {
                     breed: action.payload
                 }
             }
-            console.log(action.payload);
             return {
                 ...state,
                 breed: state.dogs.filter(el => el.id === action.payload)[0]
@@ -36,6 +35,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 temperaments: action.payload
+            }
+        case POST_DOG:
+            state.dogs.unshift(action.payload);
+            return {
+                ...state
             }
         case FILTER_BY_TEMPERAMENTS:
             if(action.payload === 'todos' || action.payload === '') return {...state}

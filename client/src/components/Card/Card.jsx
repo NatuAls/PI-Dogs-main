@@ -2,7 +2,10 @@ import './Card.css'
 import { Link } from 'react-router-dom';
 import imageDefault from '../../images/istockphoto-1223195737-612x612.jpg'
 
-function Card({id, name, image = imageDefault, temperament = 'Sin especificar', weight}) {
+function Card({id, name, image, temperament = [], weight}) {
+
+    if(!image) image = imageDefault;
+    if(!temperament.length) temperament = 'Sin especificar';
 
     return(
         <div className='card'>

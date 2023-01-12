@@ -11,23 +11,26 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     name: {
-        type: DataTypes.STRING,
-        allowNull: true
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    image: {
+      type: DataTypes.STRING
     },
     height: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     weight: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     life_span: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING
     },
     createInDb: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   },{timestamps: false});
 };

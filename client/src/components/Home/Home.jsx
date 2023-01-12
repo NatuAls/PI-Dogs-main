@@ -67,11 +67,12 @@ const Home = () => {
                     </div>
                 </div>}
                 {loader === false && currentDogs.map(el => {
+                    if(el.image && el.image.url) el.image = el.image.url;
                     return <Card 
                         key={el.id}
                         id={el.id}
-                        name={el.name} 
-                        image={el.image && el.image.url}
+                        name={el.name && el.name} 
+                        image={el.image}
                         temperament={el.temperament} 
                         weight={el.weight}
                         createInDb={el.createInDb}
