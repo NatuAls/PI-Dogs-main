@@ -9,26 +9,33 @@ import './BreedForm.css'
 
 export function validate(input){
     let errors = {};
+
     if(!input.name){
         errors.name = 'El nombre es necesario';
     } else if(!/^[a-zA-Z ]+$/.test(input.name)){
         errors.name = 'El nombre no puede contener simbolos ni numeros';
     }
-    if(input.height_min >= input.height_max){
+
+    if(!input.height_min || !input.height_max){
+        errors.height = 'Los valores de la altura son necesarios'
+    } else if(parseInt(input.height_min) === 0 || parseInt(input.height_max) === 0){
+        errors.height = 'Los valores de la altura no pueden ser 0'
+    } else if(parseInt(input.height_min) >= parseInt(input.height_max)){
         errors.height = 'El valor minimo debe ser menor que el maximo';
     }
-    if(input.height_max <= input.height_min){
-        errors.height = 'El valor maximo debe ser mayor que el minimo';
-    }
-    if(input.weight_min >= input.weight_max){
+
+    if(!input.weight_min || !input.weight_max){
+        errors.weight = 'Los valores del peso son necesarios'
+    } else if(parseInt(input.weight_min) === 0 || parseInt(input.weight_max) === 0){
+        errors.weight = 'Los valores del peso no pueden ser 0'
+    } else if(parseInt(input.weight_min) >= parseInt(input.weight_max)){
         errors.weight = 'El valor minimo debe ser menor que el maximo';
     }
-    if(input.weight_max <= input.weight_min){
-        errors.weight = 'El valor maximo debe ser menor que el minimo';
-    }
+
     if(input.image !== '' && !/^(ftp|http|https):\/\/[^ "]+$/.test(input.image)){
-        errors.image = 'Imagen deberia ser un URL'
+        errors.image = 'Deberia ser URL'
     }
+
     return errors;
 }
 
@@ -86,7 +93,6 @@ function BreedForm() {
         await dispatch(getDogs());
         await dispatch(postDog(result));
         setResult(true);
-        //const newDog = allDogs[0];
         await setTimeout(() => history.push(`/home`), 1000);
     }
 
@@ -109,8 +115,7 @@ function BreedForm() {
                         name='name'
                         value={input.name}
                         onChange={handleOnchange}
-                        id='inputname'
-                        className={errors.name ? 'danger' : null}
+                        className={`inputname ${errors.name ? 'danger' : null}`}
                         />
                     </div>
                     {errors.name && <p className="danger">{errors.name}</p>}
@@ -181,8 +186,7 @@ function BreedForm() {
                         name='image'
                         value={input.image}
                         onChange={handleOnchange}
-                        id='inputimage'
-                        className={errors.image ? 'danger' : null}
+                        className={`inputimage ${errors.image ? 'danger' : null}`}
                         />
                     </div>
                     {errors.image && <p className="danger">{errors.image}</p>}

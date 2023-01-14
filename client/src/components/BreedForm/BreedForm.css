@@ -44,17 +44,17 @@ p.danger {
 }
 
 input.danger {
-    border: 2px solid red;
+    border: solid 2px red;
     border-radius: 4px;
 }
 
-#inputname {
+.inputname {
     margin: 5px;
     border: solid 1px black;
     border-radius: 4px;
 }
 
-#inputimage {
+.inputimage {
     width: 95vh;
     margin: 5px;
     border: solid 1px black;

@@ -10,19 +10,37 @@
     border: solid 1px white;
 }
 
+.currentbutton {
+    height: 20px;
+    width: auto;
+    border: solid 2px black;
+    border-radius: 4px;
+}
+
+b {
+    color: rgb(47, 122, 47);
+    font-weight: 750;
+}
+
 .prevbutton {
     margin-left: 10px;
     height: 20px;
     width: auto;
+    border: solid 1px black;
+    border-radius: 4px;
 }
 
 .nextbutton {
     margin-right: 10px;
     height: 20px;
     width: auto;
+    border: solid 1px black;
+    border-radius: 4px;
 }
 
 .buttonpage {
     height: 20px;
     width: auto;
+    border: solid 1px black;
+    border-radius: 4px;
 }
