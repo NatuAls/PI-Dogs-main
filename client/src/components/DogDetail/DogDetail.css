@@ -12,13 +12,14 @@
     height: 45px;
     width: max-content;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: solid 1px white;
+    background-color: black;
+    border: solid 2px aliceblue;
     border-radius: 12px;
+    box-shadow: 2px 2px aliceblue;
 }
 
 .titulodetail {
-    color: white;
+    color: rgb(6, 176, 165);
     margin: 0px auto;
     margin-left: 10px;
     margin-right: 10px;
@@ -31,6 +32,7 @@
     width: min-content;
     margin: 20px auto;
     text-align: center;
+    box-shadow: 3px 3px black;
 }
 
 .imagedetail {
