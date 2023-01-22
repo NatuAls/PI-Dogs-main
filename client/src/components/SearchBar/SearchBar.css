@@ -25,3 +25,17 @@
     box-shadow: 2px 2px aliceblue;
     color: aliceblue;
 }
+
+@media (min-width: 1400px) {
+    .searchbar{
+        width: 8.5rem;
+        height: 1.3rem;
+    }
+
+    .searchbarbutton{
+        margin-top: 5px;
+        width: 4rem;
+        height: 1.6rem;
+        font-weight: bold;
+    }
+}

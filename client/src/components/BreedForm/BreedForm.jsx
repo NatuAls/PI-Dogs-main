@@ -101,7 +101,7 @@ function BreedForm() {
     }
 
     return(
-        <div className="background">
+        <div className="backgroundform">
             <NavBar/>
             <div className="divtitulo">
                 <h1 className="titulodetail">Crea tu propia raza de perro en Henry Dogs</h1>
@@ -183,8 +183,8 @@ function BreedForm() {
                     </div>
 
                     <legend>Imagen</legend>
-                    <div className="divinput">
-                        <label className="labelleft" htmlFor="image">URL:</label>
+                    <div className="divinputimage">
+                        <label htmlFor="image">URL:</label>
                         <input 
                         type="text" 
                         name='image'

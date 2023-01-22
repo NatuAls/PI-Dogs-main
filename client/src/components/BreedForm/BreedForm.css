@@ -1,5 +1,15 @@
+.backgroundform {
+    padding-bottom: 100px;
+    position: relative;
+    background-image: url('../../images/pexels-pixmike-413195.jpg');
+    background-size: 100%;
+    height: auto;
+    width: 100%;
+}
+
 .divform {
     margin: 20px auto;
+    margin-bottom: 30px;
     height: min-content;
     width: 60%;
     background-color: rgba(255, 255, 255, 0.8);
@@ -61,17 +71,24 @@ input.danger {
     border-radius: 4px;
 }
 
-.inputimage {
-    width: 90vh;
-    margin: 5px;
-    border: solid 1px black;
-    border-radius: 4px;
+.divinputimage {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: solid 2px black;
+    border-radius: 7px;
+    background-color: rgba(192, 192, 192, 0.4);
+    width: 70%;
+    margin: 0px auto;
+    margin-bottom: 8px;
 }
 
-@media (min-width: 1400px) {
-    .inputimage {
-        width: 55vh;
-    }
+.inputimage {
+    width: 87%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: solid 1px black;
+    border-radius: 4px;
 }
 
 .divinput {
