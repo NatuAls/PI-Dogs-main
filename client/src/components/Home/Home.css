@@ -108,3 +108,19 @@
     color: white;
     margin-left: 10px;
 }
+
+@media (max-width: 500px) {
+    .divsearchandfilters {
+        height: min-content;
+        width: 90%;
+    }
+
+    .divfilters {
+        flex-wrap: wrap;
+    }
+
+    .notfound {
+        height: min-content;
+        width: 95%
+    }
+}

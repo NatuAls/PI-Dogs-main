@@ -11,7 +11,7 @@ const NavBar = () => {
                     <span className='henry'> Henry Dogs </span>
                 </div>
             </Link>
-            <ul>
+            <ul className="listnavbar">
                 <Link className="navtext" to='/home'>Home</Link>
                 <Link className="navtext" to='/create/breed'>Crear Raza</Link>
             </ul>
